@@ -275,49 +275,37 @@ include 'connect.php';
 <a class="btn btn-outline-success" href="addProduct.php">+ Add Product</a>
         </div>
       </div>
-      <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Image</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">QTY</th>
-      <th scope="col">Expiry Date</th>
-      <th scope="col">Description</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-<?php
-$sql = "select * from products";
-$result = mysqli_query($conn, $sql);
-if ($result) {
-while ($row = mysqli_fetch_assoc($result)) {
-  $product_name = $row['product_name'];
-  $price = $row['price'];
-  $QTY = $row['quantity'];
-  $product_image = $row['image'];
-  $expiry_date = $row['expiry_date'];
-  $description = $row['description'];
-  echo '
-  <tr>
-  <td scop="row">'.$product_image.'</td>
-  <td scop="row">'.$product_name.'</td>
-  <td scop="row">'.$price.'</th>
-  <td scop="row">'.$QTY.'</td>
-  <td scop="row">'.$expiry_date.'</td>
-  <td scop="row">'.$description.'</td>
-  <td>
-  <button class="btn btn-primary"><a href="" class="text-light">Update</a></button>
-  <button class="btn btn-danger"><a href="" class="text-light">Delete</a></button>
-</td>
-  </tr>';
-}
-}
-?>
 
-  </tbody>
-</table>
+<?php
+$query = "select * from products";
+$result = mysqli_query($conn, $query);
+echo"<table class='table'>";
+echo"<thead>";
+echo"<tr>";
+echo"<th scope='col'>Image</th>";
+echo"<th scope='col'>Name</th>";
+echo"<th scope='col'>Price</th>";
+echo"<th scope='col'>QTY</th>";
+echo"<th scope='col'>Expiry Date</th>";
+echo"<th scope='col'>Description</th>";
+echo"<th scope='col'>Actions</th>";
+echo"</tr>";
+  
+while ($row = mysqli_fetch_assoc($result)) {
+  echo"<tr>";
+  echo"<td><img src='".$row['image'] ." ' width='60' height'60'></td>";
+  echo"<td>".$row['product_name'] ."</td>";
+  echo"<td>".$row['price'] ."</td>";
+  echo"<td>".$row['quantity'] ."</td>";
+  echo"<td>".$row['expiry_date'] ."</td>";
+  echo"<td>".$row['description'] ."</td>";
+  echo"</tr>";
+}
+echo"</thead>";
+echo"<tbody>";
+echo"</tbody>";
+echo"</table>";
+?>
     </main>
   </div>
 </div>
