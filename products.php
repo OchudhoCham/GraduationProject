@@ -299,6 +299,8 @@ while ($row = mysqli_fetch_assoc($result)) {
   echo"<td>".$row['quantity'] ."</td>";
   echo"<td>".$row['expiry_date'] ."</td>";
   echo"<td>".$row['description'] ."</td>";
+  echo"<td><button class='btn btn-primary'><a href='' class='text-light'>Update</a></button>
+  <button class='btn btn-danger'><a href='' class='text-light'>Delete</a></button>";
   echo"</tr>";
 }
 echo"</thead>";
