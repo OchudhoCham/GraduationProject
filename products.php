@@ -282,6 +282,7 @@ $result = mysqli_query($conn, $query);
 echo"<table class='table'>";
 echo"<thead>";
 echo"<tr>";
+echo"<th scope='col'>ID</th>";
 echo"<th scope='col'>Image</th>";
 echo"<th scope='col'>Name</th>";
 echo"<th scope='col'>Price</th>";
@@ -293,6 +294,7 @@ echo"</tr>";
   
 while ($row = mysqli_fetch_assoc($result)) {
   echo"<tr>";
+  echo"<td>".$row['product_id']."</td>";
   echo"<td><img src='".$row['image'] ." ' width='60' height'60'></td>";
   echo"<td>".$row['product_name'] ."</td>";
   echo"<td>".$row['price'] ."</td>";
@@ -300,7 +302,7 @@ while ($row = mysqli_fetch_assoc($result)) {
   echo"<td>".$row['expiry_date'] ."</td>";
   echo"<td>".$row['description'] ."</td>";
   echo"<td><button class='btn btn-primary'><a href='update_product.php' class='text-light'>Update</a></button>
-  <button class='btn btn-danger'><a href='delete_product.php' class='text-light'>Delete</a></button>";
+  <button class='btn btn-danger'><a href='delete_product.php?deleteid=".$row['product_id']."' class='text-light'>Delete</a></button>";
   echo"</tr>";
 }
 echo"</thead>";
