@@ -94,6 +94,9 @@
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
       }
+      body{
+        background-color:white !important;
+      }
     </style>
 
     
