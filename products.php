@@ -176,7 +176,7 @@ include 'connect.php';
   </symbol>
 </svg>
 
-<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+<header class="navbar sticky-top bg-light flex-md-nowrap p-0 shadow" data-bs-theme="light">
   <ul class="navbar-nav flex-row d-md-none">
     <li class="nav-item text-nowrap">
       <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
@@ -310,8 +310,8 @@ while ($row = mysqli_fetch_assoc($result)) {
   echo"<td>".$row['quantity']."</td>";
   echo"<td>".$row['expiry_date']."</td>";
   echo"<td>".$row['description']."</td>";
-  echo"<td><button class='btn btn-primary'><a href='update_product.php' class='text-light'>Update</a></button>
-  <button class='btn btn-danger'><a href='delete_product.php?deleteid=".$row['product_id']."' class='text-light'>Delete</a></button>";
+  echo"<td><a href='update_product.php' class='text-light'><button class='btn btn-primary'>Update</button></a>
+  <a href='delete_product.php?deleteid=".$row['product_id']."' class='text-light'><button class='btn btn-danger'>Delete</button></a>";
   echo"</tr>";
 }
 echo"</thead>";
