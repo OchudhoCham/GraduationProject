@@ -1,6 +1,15 @@
 <?php
 include 'connect.php';
 $row['product_id'] = $_GET['updateid'];
+$sql = "select * from products where product_id =".$row['product_id']." ";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$product_name = $row['description'];
+$price = $row['price'];
+$QTY = $row['quantity'];
+$product_image = $row['image'];
+$expiry_date = $row['expiry_date'];
+$description = $row['description'];
 if (isset($_POST['submit'])) {
   $product_name  = $_POST['product_name'];
   $price  = $_POST['price'];
@@ -294,27 +303,27 @@ if (isset($_POST['submit'])) {
         <div class="form-row">
             <div class="col-md-6">
               <label for="product_name">Product Name</label>
-              <input class="form-control text-center" type="text" name="product_name" placeholder="" >
+              <input class="form-control text-center" type="text" name="product_name" placeholder="" value="<?php echo $product_name?>">
     </div>
     <div class="col-md-6">
               <label for="price">Price</label>
-              <input class="form-control text-center" name="price" type="text" placeholder="">
+              <input class="form-control text-center" name="price" type="text" placeholder="" value="<?php echo $price?>">
     </div>
     <div class="col-md-6">
               <label for="QTY">QTY</label>
-              <input class="form-control text-center" type="text" name="quantity" placeholder="" >
+              <input class="form-control text-center" type="text" name="quantity" placeholder="" value="<?php echo $QTY?>">
     </div>
     <div class="col-md-6">
               <label for="product_image">Image</label>
-              <input class="btn btn-outline-success form-control" type="file" name="product_image">
+              <input class="btn btn-outline-success form-control" type="file" name="product_image" value="<?php echo $product_image?>">
     </div>
     <div class="col-md-6">
               <label for="expiry_date">Expiry Date</label>
-              <input class="form-control text-center" type="date" name="expiry_date" placeholder="  ">
+              <input class="form-control text-center" type="date" name="expiry_date" placeholder="" value="<?php echo $expiry_date?>">
     </div>
     <div class="col-md-6">
         <label>Product Description</label>
-        <textarea class="form-control" rows="5" name="description" value=""></textarea>
+        <textarea class="form-control" rows="5" name="description" value="<?php echo $description?>"></textarea>
               <input type="submit" value="Update" name="submit" class="btn btn-success">
             </form>
     </main>

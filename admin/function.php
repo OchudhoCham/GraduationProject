@@ -1,10 +1,10 @@
 <?php
-
+include 'connect.php';
 function check_login($conn){
 
-if (isset($_SESSION['username'])){
-    $username = $_SESSION['username'];
-    $query = "seleect * from user where username = '$username' limit 1";
+if (isset($_SESSION['admin_email'])){
+    $email = $_SESSION['admin_email'];
+    $query = "seleect * from admin where admin_email = '$email' limit 1";
     
     $result =  mysqli_query($conn, $query);
     if ($result && mysqli_num_rows($result) > 0) {
