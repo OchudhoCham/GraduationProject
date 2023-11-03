@@ -5,13 +5,13 @@ include("function.php");
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-  $username = $_POST['username'];
-  $password = $_POST['password'];
+  $admin_email = $_POST['admin_email'];
+  $admin_password = $_POST['admin_password'];
 
-  if (!empty($username) && !empty($password) && !is_numeric($username)) {
+  if (!empty($admin_email) && !empty($admin_password) && !is_numeric($admin_email)) {
     
     //read from the database
-  $query = "select * from user where username = '$username' limit 1";
+  $query = "select * from user where admin_email = '$admin_email' limit 1";
   $result = mysqli_query($conn, $query);
 
   if ($result) {
@@ -19,9 +19,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
       $user_data = mysqli_fetch_assoc($result);
 
-      if ($user_data['password'] === $password) {
+      if ($user_data['admin_password'] === $password) {
         
-        $_SESSION['username'] = $user_data['username'];
+        $_SESSION['admin_email'] = $user_data['admin_email'];
         header("location:dashboard.php");
         die;
       }
