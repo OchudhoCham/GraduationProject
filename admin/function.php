@@ -2,9 +2,9 @@
 include 'connect.php';
 function check_login($conn){
 
-if (isset($_SESSION['admin_email'])){
-    $email = $_SESSION['admin_email'];
-    $query = "seleect * from admin where admin_email = '$email' limit 1";
+if (isset($_SESSION['admin_id'])){
+    $admin_id = $_SESSION['admin_id'];
+    $query = "seleect * from admin where admin_id = '$admin_id' limit 1";
     
     $result =  mysqli_query($conn, $query);
     if ($result && mysqli_num_rows($result) > 0) {
@@ -16,7 +16,7 @@ if (isset($_SESSION['admin_email'])){
 
 //redirect  to login
 
-header("location:index.php");
+header("Location:index.php");
 die;
 }
-?>
+

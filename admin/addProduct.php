@@ -4,7 +4,8 @@ if (isset($_POST['submit'])) {
   $product_name  = $_POST['product_name'];
   $price  = $_POST['price'];
   $QTY  = $_POST['quantity'];
-  $product_image  = $_POST['product_image'];
+  $product_image = $_FILES['product_image']['name'];
+  move_uploaded_file($_FILES["product_image"]["tmp_name"], "img/products/" . $_FILES["product_image"]["name"]);
   $expiry_date  = $_POST['expiry_date'];
   $description = $_POST['description'];
 
@@ -305,7 +306,7 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="col-md-6">
               <label for="product_image">Image</label>
-              <input class="btn btn-outline-success form-control" type="file" name="product_image">
+              <input class="btn btn-outline-success form-control" type="file" name="product_image" accept=".jpg, .png, .jpeg">
     </div>
     <div class="col-md-6">
               <label for="expiry_date">Expiry Date</label>

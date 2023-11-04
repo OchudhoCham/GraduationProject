@@ -1,10 +1,9 @@
 <?php
-
 session_start();
-include("connect.php");
-include("function.php");
-
+include 'connect.php';
+include 'function.php';
 $user_data = check_login($conn);
+
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">

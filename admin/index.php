@@ -1,36 +1,25 @@
 <?php
+if (isset($_POST['admin_email']) && isset($_POST['admin_password'])) {
+  function validate($data){
 
-include("connect.php");
-include("function.php");
-
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-
-  $admin_email = $_POST['admin_email'];
-  $admin_password = $_POST['admin_password'];
-
-  if (!empty($admin_email) && !empty($admin_password) && !is_numeric($admin_email)) {
-    
-    //read from the database
-  $query = "select * from user where admin_email = '$admin_email' limit 1";
-  $result = mysqli_query($conn, $query);
-
-  if ($result) {
-    if ($result && mysqli_num_rows($result) > 0) {
-
-      $user_data = mysqli_fetch_assoc($result);
-
-      if ($user_data['admin_password'] === $password) {
-        
-        $_SESSION['admin_email'] = $user_data['admin_email'];
-        header("location:dashboard.php");
-        die;
-      }
-    }
   }
-else {
-  echo"<script>alert('Wrong Username or Password!')</script>";
+$admin_email = validate($_POST['admin_email']);
+$admin_password = validate($_POST['admin_password']);
+
+if (empty($admin_email)) {
+  header("Location:dashboard.php?error=Email is required");
+  exit();
 }
-  }
+elseif (empty($admin_password)) {
+  header("Location:dashboard.php?error=Password is required");
+}
+}
+else {
+$sql = "select * from admin where admin_email = '$admin_email' AND admin_password = '$admin_password'";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) === 1) {
+  header ('Location:dashboard.php');
+}
 }
 ?>
 <!doctype html>
@@ -152,18 +141,18 @@ else {
 
     
 <main class="form-signin w-100 m-auto">
-  <form method="POST" action="functioin.php">
+  <form method="POST" action="index.php">
     <h1 class="h3 mb-3 fw-normal">Admin Login</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="admin_email">
       <label for="floatingInput">Username</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="admin_password">
       <label for="floatingPassword">Password</label>
     </div>
-    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+    <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
   </form>
 </main>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
