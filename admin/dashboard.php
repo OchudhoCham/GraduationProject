@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_email'])) {
+
+?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="assets/js/color-modes.js"></script>
@@ -237,7 +243,7 @@
 
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="logout.php">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
                 Logout
               </a>
@@ -259,3 +265,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>
 </html>
+<?php
+}
+else {
+  header("Location:index.php");
+  exit();
+}
+?>
