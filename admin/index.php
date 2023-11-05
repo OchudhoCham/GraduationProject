@@ -1,27 +1,3 @@
-<?php
-if (isset($_POST['admin_email']) && isset($_POST['admin_password'])) {
-  function validate($data){
-
-  }
-$admin_email = validate($_POST['admin_email']);
-$admin_password = validate($_POST['admin_password']);
-
-if (empty($admin_email)) {
-  header("Location:dashboard.php?error=Email is required");
-  exit();
-}
-elseif (empty($admin_password)) {
-  header("Location:dashboard.php?error=Password is required");
-}
-}
-else {
-$sql = "select * from admin where admin_email = '$admin_email' AND admin_password = '$admin_password'";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) === 1) {
-  header ('Location:dashboard.php');
-}
-}
-?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
     <meta charset="utf-8">
@@ -38,6 +14,7 @@ if (mysqli_num_rows($result) === 1) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
 <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
     <style>
       .bd-placeholder-img {
@@ -141,18 +118,20 @@ if (mysqli_num_rows($result) === 1) {
 
     
 <main class="form-signin w-100 m-auto">
-  <form method="POST" action="index.php">
+  <form method="POST" action="login.php">
     <h1 class="h3 mb-3 fw-normal">Admin Login</h1>
-
+    <?php if (isset($_GET['error'])) { ?>
+      <p class="error "><?php echo $_GET['error'];?></p>
+      <?php } ?>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="admin_email">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Admin Email" name="admin_email">
       <label for="floatingInput">Username</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="admin_password">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Admin Password" name="admin_password">
       <label for="floatingPassword">Password</label>
     </div>
-    <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+    <button class="btn btn-primary w-100 py-2" type="submit" name="submit">Login</button>
   </form>
 </main>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>

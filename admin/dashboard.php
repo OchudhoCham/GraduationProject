@@ -1,10 +1,3 @@
-<?php
-session_start();
-include 'connect.php';
-include 'function.php';
-$user_data = check_login($conn);
-
-?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="assets/js/color-modes.js"></script>
@@ -12,6 +5,7 @@ $user_data = check_login($conn);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
     <title>Dashboard</title>
 
@@ -192,12 +186,18 @@ $user_data = check_login($conn);
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="users.php">
+              <a class="nav-link d-flex align-items-center gap-2" href="Stuff.php">
                 <svg class="bi"><use xlink:href="#people"/></svg>
-                User Management
+                Stuff
               </a>
             </li>
-              
+
+                        <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="customers.php">
+                <svg class="bi"><use xlink:href="#people"/></svg>
+                Customers
+              </a>
+            </li>
             </li>
 
             <li class="nav-item">
@@ -237,7 +237,7 @@ $user_data = check_login($conn);
 
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="index.html">
+              <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
                 Logout
               </a>
