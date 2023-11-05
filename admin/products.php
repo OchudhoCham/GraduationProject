@@ -298,6 +298,7 @@ echo"<th scope='col'>Actions</th>";
 echo"</tr>";
   
 while ($row = mysqli_fetch_assoc($result)) {
+  
   echo"<tr>";
   echo"<td>".$row['product_id']."</td>";
   echo"<td><img src='".$row['image']." ' width='60' height'60'></td>";
