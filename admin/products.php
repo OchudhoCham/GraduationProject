@@ -18,7 +18,6 @@ include 'connect.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
 <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
 
     <style>
       .bd-placeholder-img {
@@ -263,7 +262,7 @@ include 'connect.php';
 
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="logout.php">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
                 Logout
               </a>

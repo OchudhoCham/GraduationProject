@@ -1,38 +1,3 @@
-<?php
-
-include("connect.php");
-include("function.php");
-
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-
-  if (!empty($username) && !empty($password) && !is_numeric($username)) {
-    
-    //read from the database
-  $query = "select * from user where username = '$username' limit 1";
-  $result = mysqli_query($conn, $query);
-
-  if ($result) {
-    if ($result && mysqli_num_rows($result) > 0) {
-
-      $user_data = mysqli_fetch_assoc($result);
-
-      if ($user_data['password'] === $password) {
-        
-        $_SESSION['username'] = $user_data['username'];
-        header("location:dashboard.php");
-        die;
-      }
-    }
-  }
-else {
-  echo"<script>alert('Wrong Username or Password!')</script>";
-}
-  }
-}
-?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
     <meta charset="utf-8">
@@ -152,18 +117,20 @@ else {
 
     
 <main class="form-signin w-100 m-auto">
-  <form method="POST" action="functioin.php">
+  <form method="POST" action="login.php">
     <h1 class="h3 mb-3 fw-normal">Cashier Login</h1>
-
+    <?php if (isset($_GET['error'])) { ?>
+      <p class="error "><?php echo $_GET['error'];?></p>
+      <?php } ?>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Email Address" name="stuff_email">
       <label for="floatingInput">Username</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="stuff_password">
       <label for="floatingPassword">Password</label>
     </div>
-    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+    <button class="btn btn-primary w-100 py-2" type="submit" name="submit">Sign in</button>
   </form>
 </main>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>

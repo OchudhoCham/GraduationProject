@@ -1,17 +1,14 @@
 <?php
 
 include("connect.php");
-include("function.php");
-
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-
-  $username = $_POST['username'];
-  $password = $_POST['password'];
+  $username = $_POST['customer_email'];
+  $password = $_POST['customer_password'];
 
   if (!empty($username) && !empty($password) && !is_numeric($username)) {
     
     //read from the database
-  $query = "select * from user where username = '$username' limit 1";
+  $query = "";
   $result = mysqli_query($conn, $query);
 
   if ($result) {

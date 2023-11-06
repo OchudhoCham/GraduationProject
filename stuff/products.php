@@ -1,20 +1,5 @@
 <?php
 include 'connect.php';
-if (isset($_POST['submit'])) {
-  $stuff_name  = $_POST['stuff_name'];
-  $stuff_contact  = $_POST['stuff_contact'];
-  $stuff_email  = $_POST['stuff_email'];
-  $stuff_password  = $_POST['stuff_password'];
-
-  $sql = "insert into stuff (stuff_name, stuff_contact, stuff_email, stuff_password) values ('$stuff_name', '$stuff_contact', '$stuff_email', '$stuff_password')";
-  $result = mysqli_query($conn, $sql);
-  if ($result) {
-    echo "<script>alert('Stuff Added Successfully.')</script>";
-  }
-  else {
-    die(mysqli_error($conn));
-  }
-}
 ?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
@@ -112,6 +97,9 @@ if (isset($_POST['submit'])) {
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
       }
+      body{
+        background-color:white !important;
+      }
     </style>
 
     
@@ -188,7 +176,7 @@ if (isset($_POST['submit'])) {
   </symbol>
 </svg>
 
-<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+<header class="navbar sticky-top bg-light flex-md-nowrap p-0 shadow" data-bs-theme="light">
   <ul class="navbar-nav flex-row d-md-none">
     <li class="nav-item text-nowrap">
       <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
@@ -209,8 +197,8 @@ if (isset($_POST['submit'])) {
 
 <div class="container-fluid">
   <div class="row">
-    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-      <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 ">
+      <div class="offcanvas-md offcanvas-end " tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="sidebarMenuLabel">Munuki Top</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
@@ -275,7 +263,7 @@ if (isset($_POST['submit'])) {
 
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="logout.php">
+              <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
                 Logout
               </a>
@@ -287,35 +275,51 @@ if (isset($_POST['submit'])) {
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">+ Add New User</h1>
+        <h1 class="h2">Product Management</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="mb-3"></div>
+<a class="btn btn-outline-success" href="addProduct.php">+ Add Product</a>
         </div>
       </div>
-      <form method="POST" action = "">
-        <div class="form-row">
-            <div class="col-md-6">
-              <label for="username">Stuff Name</label>
-              <input class="form-control text-center" type="text" name="stuff_name" placeholder="" >
-    </div>
-    <div class="col-md-6">
-              <label for="userEmail">Contact</label>
-              <input class="form-control text-center" name="stuff_contact" type="text" placeholder="">
-    </div>
-    <div class="col-md-6">
-              <label for="userContact">Email</label>
-              <input class="form-control text-center" type="text" name="stuff_email" placeholder="  ">
-    </div>
-    <div class="col-md-6">
-              <label for="password">password</label>
-              <input class="btn btn-outline-success form-control" type="password" name="stuff_password">
-    </div>
 
-    <input type="submit" value="Add Stuff" name="submit" class="btn btn-success">
-            </form>
+<?php
+$sql = "select * from products";
+$result = mysqli_query($conn, $sql);
+echo"<table class='table'>";
+echo"<thead>";
+echo"<tr>";
+echo"<th scope='col'>ID</th>";
+echo"<th scope='col'>Image</th>";
+echo"<th scope='col'>Name</th>";
+echo"<th scope='col'>Price</th>";
+echo"<th scope='col'>QTY</th>";
+echo"<th scope='col'>Expiry Date</th>";
+echo"<th scope='col'>Description</th>";
+echo"<th scope='col'>Actions</th>";
+echo"</tr>";
+  
+while ($row = mysqli_fetch_assoc($result)) {
+  
+  echo"<tr>";
+  echo"<td>".$row['product_id']."</td>";
+  echo"<td><img src='".$row['image']." ' width='60' height'60'></td>";
+  echo"<td>".$row['product_name']."</td>";
+  echo"<td>".$row['price']."</td>";
+  echo"<td>".$row['quantity']."</td>";
+  echo"<td>".$row['expiry_date']."</td>";
+  echo"<td>".$row['description']."</td>";
+  echo"<td><a href='update_product.php?updateid=".$row['product_id']."' class='text-light'><button class='btn btn-primary'>Update</button></a>
+  <a href='delete_product.php?deleteid=".$row['product_id']."' class='text-light'><button class='btn btn-danger'>Delete</button></a>";
+  echo"</tr>";
+}
+echo"</thead>";
+echo"<tbody>";
+echo"</tbody>";
+echo"</table>";
+?>
     </main>
   </div>
 </div>
+<script src="script.js"></script>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script><script src="dashboard.js"></script></body>

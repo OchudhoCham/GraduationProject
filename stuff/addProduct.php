@@ -1,15 +1,19 @@
 <?php
 include 'connect.php';
 if (isset($_POST['submit'])) {
-  $stuff_name  = $_POST['stuff_name'];
-  $stuff_contact  = $_POST['stuff_contact'];
-  $stuff_email  = $_POST['stuff_email'];
-  $stuff_password  = $_POST['stuff_password'];
+  $product_name  = $_POST['product_name'];
+  $price  = $_POST['price'];
+  $QTY  = $_POST['quantity'];
+  $product_image = $_FILES['product_image']['name'];
+  move_uploaded_file($_FILES["product_image"]["tmp_name"], "img/products/" . $_FILES["product_image"]["name"]);
+  $expiry_date  = $_POST['expiry_date'];
+  $description = $_POST['description'];
 
-  $sql = "insert into stuff (stuff_name, stuff_contact, stuff_email, stuff_password) values ('$stuff_name', '$stuff_contact', '$stuff_email', '$stuff_password')";
+  $sql = "insert into products (product_name, price, quantity, image, expiry_date) values ('$product_name', '$price', '$QTY', '$product_image', '$expiry_date')";
   $result = mysqli_query($conn, $sql);
   if ($result) {
-    echo "<script>alert('Stuff Added Successfully.')</script>";
+    echo "<script>alert('Product Added Successfully.')</script>";
+    header('location:products.php');
   }
   else {
     die(mysqli_error($conn));
@@ -224,18 +228,12 @@ if (isset($_POST['submit'])) {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="Stuff.php">
+              <a class="nav-link d-flex align-items-center gap-2" href="users.php">
                 <svg class="bi"><use xlink:href="#people"/></svg>
-                Stuff
+                User Management
               </a>
             </li>
-
-                        <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="customers.php">
-                <svg class="bi"><use xlink:href="#people"/></svg>
-                Customers
-              </a>
-            </li>
+              
             </li>
 
             <li class="nav-item">
@@ -275,7 +273,7 @@ if (isset($_POST['submit'])) {
 
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="logout.php">
+              <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
                 Logout
               </a>
@@ -287,7 +285,7 @@ if (isset($_POST['submit'])) {
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">+ Add New User</h1>
+        <h1 class="h2">+ Add New Product</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="mb-3"></div>
         </div>
@@ -295,23 +293,29 @@ if (isset($_POST['submit'])) {
       <form method="POST" action = "">
         <div class="form-row">
             <div class="col-md-6">
-              <label for="username">Stuff Name</label>
-              <input class="form-control text-center" type="text" name="stuff_name" placeholder="" >
+              <label for="product_name">Product Name</label>
+              <input class="form-control text-center" type="text" name="product_name" placeholder="" >
     </div>
     <div class="col-md-6">
-              <label for="userEmail">Contact</label>
-              <input class="form-control text-center" name="stuff_contact" type="text" placeholder="">
+              <label for="price">Price</label>
+              <input class="form-control text-center" name="price" type="text" placeholder="">
     </div>
     <div class="col-md-6">
-              <label for="userContact">Email</label>
-              <input class="form-control text-center" type="text" name="stuff_email" placeholder="  ">
+              <label for="QTY">QTY</label>
+              <input class="form-control text-center" type="text" name="quantity" placeholder="" >
     </div>
     <div class="col-md-6">
-              <label for="password">password</label>
-              <input class="btn btn-outline-success form-control" type="password" name="stuff_password">
+              <label for="product_image">Image</label>
+              <input class="btn btn-outline-success form-control" type="file" name="product_image" accept=".jpg, .png, .jpeg">
     </div>
-
-    <input type="submit" value="Add Stuff" name="submit" class="btn btn-success">
+    <div class="col-md-6">
+              <label for="expiry_date">Expiry Date</label>
+              <input class="form-control text-center" type="date" name="expiry_date" placeholder="  ">
+    </div>
+    <div class="col-md-6">
+        <label>Product Description</label>
+        <textarea class="form-control" rows="5" name="description" value=""></textarea>
+              <input type="submit" value="Add Product" name="submit" class="btn btn-success">
             </form>
     </main>
   </div>

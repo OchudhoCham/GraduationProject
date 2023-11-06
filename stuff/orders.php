@@ -1,24 +1,7 @@
-<?php
-include 'connect.php';
-if (isset($_POST['submit'])) {
-  $stuff_name  = $_POST['stuff_name'];
-  $stuff_contact  = $_POST['stuff_contact'];
-  $stuff_email  = $_POST['stuff_email'];
-  $stuff_password  = $_POST['stuff_password'];
-
-  $sql = "insert into stuff (stuff_name, stuff_contact, stuff_email, stuff_password) values ('$stuff_name', '$stuff_contact', '$stuff_email', '$stuff_password')";
-  $result = mysqli_query($conn, $sql);
-  if ($result) {
-    echo "<script>alert('Stuff Added Successfully.')</script>";
-  }
-  else {
-    die(mysqli_error($conn));
-  }
-}
-?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="assets/js/color-modes.js"></script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -33,7 +16,6 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
 <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
 
     <style>
       .bd-placeholder-img {
@@ -111,6 +93,9 @@ if (isset($_POST['submit'])) {
 
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
+      }
+      body{
+        background-color:white !important;
       }
     </style>
 
@@ -236,6 +221,7 @@ if (isset($_POST['submit'])) {
                 Customers
               </a>
             </li>
+              
             </li>
 
             <li class="nav-item">
@@ -275,7 +261,7 @@ if (isset($_POST['submit'])) {
 
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="logout.php">
+              <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
                 Logout
               </a>
@@ -287,32 +273,14 @@ if (isset($_POST['submit'])) {
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">+ Add New User</h1>
+        <h1 class="h2">Orders</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="mb-3"></div>
+          <button type="button" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1">
+            Generate Report
+          </button>
         </div>
       </div>
-      <form method="POST" action = "">
-        <div class="form-row">
-            <div class="col-md-6">
-              <label for="username">Stuff Name</label>
-              <input class="form-control text-center" type="text" name="stuff_name" placeholder="" >
-    </div>
-    <div class="col-md-6">
-              <label for="userEmail">Contact</label>
-              <input class="form-control text-center" name="stuff_contact" type="text" placeholder="">
-    </div>
-    <div class="col-md-6">
-              <label for="userContact">Email</label>
-              <input class="form-control text-center" type="text" name="stuff_email" placeholder="  ">
-    </div>
-    <div class="col-md-6">
-              <label for="password">password</label>
-              <input class="btn btn-outline-success form-control" type="password" name="stuff_password">
-    </div>
 
-    <input type="submit" value="Add Stuff" name="submit" class="btn btn-success">
-            </form>
     </main>
   </div>
 </div>

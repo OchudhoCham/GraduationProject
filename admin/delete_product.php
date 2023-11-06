@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_email'])) {
+
+?>
+<?php
 include 'connect.php';
 
 if (isset($_GET['deleteid'])) {
@@ -17,5 +23,6 @@ if (isset($_GET['deleteid'])) {
     die(mysqli_error($conn));
 
    }
+}
 }
 ?>
