@@ -132,6 +132,7 @@
       <label for="floatingPassword">Password</label>
     </div>
     <button class="btn btn-primary w-100 py-2" type="submit" name="submit">Login</button>
+<a class="btn btn-secondary w-100 py-2 mt-2" href="../index.php">Back</a> 
   </form>
 </main>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
